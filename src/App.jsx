@@ -6,7 +6,9 @@ import Footer from './components/Footer.jsx'
 import About from './components/About.jsx'
 import Contacts from './components/Contacts.jsx'
 import Signup from './components/Signup.jsx'
-import Globalapi from './services/Globalapi.jsx'
+import Productdetail from './components/Productdetail.jsx'
+import MainHome from './components/MainHome.jsx'
+import Notfound from './components/Notfound.jsx'
 
 function App() {
   return (
@@ -14,11 +16,13 @@ function App() {
       <Router>
         <Header/>
           <Routes>
-            <Route path="/" element={<Home/>}/>
+            <Route path='/' element={<MainHome/>}/>
+            <Route path="/products" element={<Home/>}/>
             <Route path="/about" element={<About/>}/>
             <Route path="/contacts" element={<Contacts/>}/>
             <Route path="/Signup" element={<Signup/>}/>
-            <Route path="*" element={<h1>404 page doesn't exists</h1>}/>
+            <Route path="/products/:pid" element={<Productdetail/>}/>
+            <Route path="*" element={<Notfound/>}/>
           </Routes>
         <Footer/>
       </Router>

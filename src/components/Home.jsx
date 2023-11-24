@@ -4,8 +4,10 @@ import Header from './Header.jsx'
 import Footer from './Footer.jsx'
 import Globalapi from '../services/Globalapi.jsx'
 import Product from './product.jsx'
+import Loading from './Loading.jsx'
 const Home = () => {
   const [productlist, setproductlist] = useState([]);
+  const [loading, setloading] = useState(true);
   const [query, setquery] = useState("");
   const [sort, setsort] = useState("Default");
 
@@ -13,8 +15,9 @@ const Home = () => {
     getproducts();
   }, [])
   const getproducts = () => {
-    Globalapi.productlist.then((resp) => {
-      setproductlist(resp.data.products)
+    Globalapi.productlist.then((products) => {
+      setproductlist(products)
+      setloading(false);
     })
       .catch((error) => {
         console.log(error);
@@ -38,6 +41,10 @@ const Home = () => {
     })
   }
 
+  if(loading){
+    return <Loading/>
+  }
+
   const handlechange = (e) => {
     setquery(e.target.value);
   }
@@ -48,9 +55,9 @@ const Home = () => {
 
   return (
     <div className='w-full h-100% overflow-x-hidden '>
-      <div className='w-100%'>
-        <div className='w-100% grid grid-cols-4'>
-          <h1 className='w-100% font-bold text-6xl col-span-1 flex justify-center text-blue-500 p-4 m-4'>AMAZON</h1>
+      <div className='w-100% h-100%'>
+        <div className='w-100% grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'>
+          <h1 className='w-100% font-bold lg:text-6xl text-4xl col-span-1 flex justify-center text-blue-500 p-4 m-4'>AMAZON</h1>
           <div className='flex col-span-3 float-right place-content-end place-items-center p-5 '>
             <input type="text"
               value={query}
@@ -67,10 +74,10 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className='w-100% object-contain grid grid-cols-4 place-items-center'>
+      <div className='w-100% object-contain grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 place-items-center'>
         {data.map((item, i) => (
-          <div key={i}>
-            <Product title={item.title} thumbnail={item.thumbnail} price={item.price} />
+          <div key={i} className=' hover:scale-105'>
+            <Product id={item.id} title={item.title} thumbnail={item.thumbnail} price={item.price} />
           </div>
         ))}
       </div>

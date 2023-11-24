@@ -5,6 +5,9 @@ const axioscreate = axios.create({
     baseURL:"https://dummyjson.com",
 })
 
-const productlist = axioscreate.get('/products');
+const productlist = axioscreate.get('/products').then((resp)=>{
+    return resp.data.products;
+});
+const getproductbyid = (id) => axioscreate.get('/products/'+ id);
 
-export default { productlist };
+export default { productlist, getproductbyid };

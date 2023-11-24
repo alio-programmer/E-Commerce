@@ -8,7 +8,7 @@ import Signup from './Signup'
 const Header = () => {
   return (
     <>
-      <nav className='w-full h-[60px] bg-slate-500 border-black border-solid border-2 flex items-center justify-evenly child:bg-slate-700 child:rounded-2xl child:text-white child:p-3 child-hover:text-blue-600'>
+      <nav className=' w-full h-[80px] p-3 bg-slate-500 border-black border-solid border-2 flex items-center justify-evenly child:bg-slate-700 child:rounded-2xl child:text-white child:p-3 child-hover:text-blue-600'>
         <Link to="/" element={<Home/>}>Home</Link>
         <Link to="/contacts" element={<Contacts/>}>Contacts</Link>
         <Link to="/about" element={<About/>}>About</Link>
