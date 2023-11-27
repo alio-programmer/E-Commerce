@@ -9,19 +9,38 @@ import Signup from './components/Signup.jsx'
 import Productdetail from './components/Productdetail.jsx'
 import MainHome from './components/MainHome.jsx'
 import Notfound from './components/Notfound.jsx'
+import Cart from './components/Cart.jsx'
 
 function App() {
+  const saveddatastring = localStorage.getItem("my-cart") || "{}";
+  const saveddata = JSON.parse(saveddatastring);
+
+  const [cart, setcart] = useState(saveddata);
+  
+  const handletocart = (Productid, count) =>{
+    const oldcount = cart[Productid] || 0;
+    const newcart = {...cart, [Productid]: oldcount + count}
+    setcart(newcart);
+    const newcartstring = JSON.stringify(newcart);
+    localStorage.setItem("my-cart", newcartstring);
+  }
+
+  const totalcount = Object.keys(cart).reduce((previous, current)=>{
+    return previous + cart[current];
+  }, 0);
+
   return (
     <>
       <Router>
-        <Header/>
+        <Header productcount = {totalcount}/>
           <Routes>
             <Route path='/' element={<MainHome/>}/>
             <Route path="/products" element={<Home/>}/>
             <Route path="/about" element={<About/>}/>
             <Route path="/contacts" element={<Contacts/>}/>
             <Route path="/Signup" element={<Signup/>}/>
-            <Route path="/products/:pid" element={<Productdetail/>}/>
+            <Route path="/products/:pid" element={<Productdetail onAddToCart={handletocart}/>}/>
+            <Route path='/cart' element={<Cart/>}/>
             <Route path="*" element={<Notfound/>}/>
           </Routes>
         <Footer/>
