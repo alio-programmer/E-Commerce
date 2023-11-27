@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './Header.jsx'
 import Footer from './Footer.jsx'
 import Globalapi from '../services/Globalapi.jsx'
-import Product from './product.jsx'
+import Product from './Product.jsx'
 import Loading from './Loading.jsx'
 const Home = () => {
   const [productlist, setproductlist] = useState([]);
