@@ -57,8 +57,7 @@ const Home = () => {
     <div className='w-full h-100% overflow-x-hidden '>
       <div className='w-100% h-100%'>
         <div className='w-100% grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'>
-          <h1 className='w-100% font-bold lg:text-6xl text-4xl col-span-1 flex justify-center text-blue-500 p-4 m-4'>AMAZON</h1>
-          <div className='flex col-span-3 float-right place-content-end place-items-center p-5 '>
+          <div className='flex col-span-4 float-right place-content-end place-items-center p-5 '>
             <input type="text"
               value={query}
               placeholder='search'
