@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import CartProduct from './CartProduct';
 import Globalapi from '../services/Globalapi';
 import Loading from './Loading';
+import Notbough from './Notbough';
 
 const Cart = ({ cart, updatecart }) => {
   const [loading, setloading] = useState(true);
@@ -50,6 +51,10 @@ const Cart = ({ cart, updatecart }) => {
     const newlocalcart = { ...localcart, [productid]: newval };
     setlocalcart(newlocalcart);
   };
+  
+  if(cart.length==0){
+    return <Notbough/>
+  }
 
   // if loading is true set we are still waiting for cart to be updated
   if (loading) {
