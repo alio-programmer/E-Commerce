@@ -16,13 +16,17 @@ function App() {
   const saveddata = JSON.parse(saveddatastring);
 
   const [cart, setcart] = useState(saveddata);
+
+  const updatecart = (newcart) =>{
+    setcart(newcart);
+    const newcartstring = JSON.stringify(newcart);
+    localStorage.setItem("my-cart", newcartstring);
+  }
   
   const handletocart = (Productid, count) =>{
     const oldcount = cart[Productid] || 0;
     const newcart = {...cart, [Productid]: oldcount + count}
-    setcart(newcart);
-    const newcartstring = JSON.stringify(newcart);
-    localStorage.setItem("my-cart", newcartstring);
+    updatecart(newcart);
   }
 
   const totalcount = Object.keys(cart).reduce((previous, current)=>{
@@ -40,7 +44,7 @@ function App() {
             <Route path="/contacts" element={<Contacts/>}/>
             <Route path="/Signup" element={<Signup/>}/>
             <Route path="/products/:pid" element={<Productdetail onAddToCart={handletocart}/>}/>
-            <Route path='/cart' element={<Cart/>}/>
+            <Route path='/cart' element={<Cart cart={cart} updatecart={updatecart}/>}/>
             <Route path="*" element={<Notfound/>}/>
           </Routes>
         <Footer/>
